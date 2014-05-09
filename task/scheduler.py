@@ -18,7 +18,11 @@ from admin.iislogs import *
 if __name__ == '__main__':
     sched = Scheduler(daemonic=False)
 
+    # import daily iis logs
     sched.add_cron_job(import_logs, day_of_week='mon-sun', hour='14', minute='58', args=['C:\Users\Administrator\Desktop\W3SVC1\u_ex140508.log'])
+
+    # daily iis logs analysis
+    sched.add_cron_job(analysis, day_of_week='0-6', hour='17', minute='30', args=[datetime.now()])
 
     sched.start()
 

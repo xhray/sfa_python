@@ -57,11 +57,14 @@ __reduce = Code("function(key, values) {"
                 "}"
                 )
 
-def analysis():
+def analysis(date):
     connection = pymongo.Connection(host = 'localhost', port = 27017)
     db = connection.test
 
-    db.iis_logs.map_reduce(__mapByDate, __reduce, out="hit_stats", full_response=True, query={"date": {"$gte": datetime(2014, 5, 8)}})
+    if date:
+        db.iis_logs.map_reduce(__mapByDate, __reduce, out="hit_stats", full_response=True, query={"date": {"$gte": datetime(date.year, date.month, date.day)}})
+    else:
+        db.iis_logs.map_reduce(__mapByDate, __reduce, out="hits_stats", full_response=True)
 
 if __name__ == '__main__':
     analysis()
