@@ -1,0 +1,10 @@
+*.pyc
+.idea/
+_pycache_/
+client/
+contract/
+geo/
+redis/
+statistics/
+team/
+connection_model.py
