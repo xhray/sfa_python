@@ -62,9 +62,9 @@ def analysis(date):
     db = connection.test
 
     if date:
-        db.iis_logs.map_reduce(__mapByDate, __reduce, out="hit_stats", full_response=True, query={"date": {"$gte": datetime(date.year, date.month, date.day)}})
+        db.iis_logs.map_reduce(__mapByDate, __reduce, {"merge":"hit_stats"}, full_response=True, query={"date": {"$gte": datetime(date.year, date.month, date.day)}})
     else:
-        db.iis_logs.map_reduce(__mapByDate, __reduce, out="hits_stats", full_response=True)
+        db.iis_logs.map_reduce(__mapByDate, __reduce, {"replace":"hit_stats"}, full_response=True)
 
 if __name__ == '__main__':
     analysis()
