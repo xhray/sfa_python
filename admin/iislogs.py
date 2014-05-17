@@ -43,7 +43,7 @@ def import_logs(filepath, all=False):
                 __import(os.path.join(filepath, filename))
 
 __mapByDate = Code("function() {"
-             "  var key = {url: this.url, year: this.date.getFullYear(), month: ('0' + (this.date.getMonth() + 1)).slice(-2), day: ('0' + this.date.getDate()).slice(-2)};"
+             "  var key = {url: this.url.toLowerCase(), year: this.date.getFullYear(), month: ('0' + (this.date.getMonth() + 1)).slice(-2), day: ('0' + this.date.getDate()).slice(-2)};"
              "  emit(key, {count: 1});"
              "}")
 
